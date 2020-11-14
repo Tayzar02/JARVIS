@@ -9,7 +9,7 @@ import time
 os.environ['TZ'] = 'US/Eastern'
 time.tzset()
 time.ctime()
-owm = pyowm.OWM("28ae4a7d1c56086a19ca2b18e2d858de")
+owm = pyowm.OWM("your OpenWeather key here")
 observation = owm.weather_at_place("21911")
 w = observation.get_weather()
 temperature = w.get_temperature('fahrenheit')

@@ -5,6 +5,7 @@ import webbrowser
 import pyowm
 import os
 import time
+from googlesearch import search
 
 os.environ['TZ'] = 'US/Eastern'
 time.tzset()
@@ -14,7 +15,7 @@ observation = owm.weather_at_place("21911")
 w = observation.get_weather()
 temperature = w.get_temperature('fahrenheit')
 text = ''
-while 'shut down' not in text:
+while 'shut down' or 'kill yourself' not in text:
 	print('\033[1;31;40m Jarvis ready, say a command \n')
 	def talk(text):
 		engine = pyttsx3.init()
@@ -43,8 +44,19 @@ while 'shut down' not in text:
 	print('\033[1;32;40m %s \n' % text)
 	
 	if ('weather' in text):
-		print('yes sir, it is currently ', int(temperature['temp']), 'degrees outside in Port Deposit, Maryland')
-	#elif ()
+		print('yes sir, it is currently ', int(temperature['temp']), 'degrees outside. With a high of ', int(temperature['temp_max']), ' and a low of ', int(temperature['temp_min']),'.')
+	elif ('search' in text):
+		text = text.replace('search','')
+		text = text.replace('Search','')
+		text = text.replace('Jarvis','')
+		text = text.replace('jarvis','')			
+		query = text
+		results = []
+		for i in search(query, tld = 'com', lang = 'en', num = 1, start = 0, stop = 1, pause = 2.0,):
+			results.append(i)
+			print(query)
+			print('yes sir, opening the top result on google shortly')
+			webbrowser.open(results[0])
 	else:
 		continue
 sys.exit()

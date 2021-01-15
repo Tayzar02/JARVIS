@@ -15,7 +15,7 @@ observation = owm.weather_at_place("21911")
 w = observation.get_weather()
 temperature = w.get_temperature('fahrenheit')
 text = ''
-while 'shut down' or 'kill yourself' not in text:
+while 'shut down' not in text:
 	print('\033[1;31;40m Jarvis ready, say a command \n')
 	def talk(text):
 		engine = pyttsx3.init()
